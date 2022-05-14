@@ -2441,8 +2441,8 @@ public class ConfigurationBuilder extends FlatJuniperParserBaseListener
         ipBgpGroups.put(remoteAddress, ipBgpGroup);
       }
       _currentBgpGroup = ipBgpGroup;
-      _configuration.defineStructure(
-          JuniperStructureType.BGP_NEIGHBOR, remoteAddress.toString(), ctx);
+      _configuration.defineFlattenedStructure(
+          JuniperStructureType.BGP_NEIGHBOR, remoteAddress.toString(), ctx, _parser);
       _configuration.referenceStructure(
           JuniperStructureType.BGP_NEIGHBOR,
           remoteAddress.toString(),
@@ -2452,7 +2452,8 @@ public class ConfigurationBuilder extends FlatJuniperParserBaseListener
       _currentBgpGroup.setIpv6(true);
       _currentBgpGroup = DUMMY_BGP_GROUP;
       String remoteAddress = toIp6(ctx.ipv6_address()).toString();
-      _configuration.defineStructure(JuniperStructureType.BGP_NEIGHBOR, remoteAddress, ctx);
+      _configuration.defineFlattenedStructure(
+          JuniperStructureType.BGP_NEIGHBOR, remoteAddress, ctx, _parser);
       _configuration.referenceStructure(
           JuniperStructureType.BGP_NEIGHBOR,
           remoteAddress,
